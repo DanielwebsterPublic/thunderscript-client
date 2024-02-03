@@ -21,6 +21,11 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
+      - name: Clear Cache
+        uses: borales/actions-yarn@v5
+        with: 
+          cmd: cache clean
+
       - name: Install Dependencies
         uses: borales/actions-yarn@v5
         with: 
