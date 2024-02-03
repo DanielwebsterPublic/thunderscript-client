@@ -1,3 +1,6 @@
+# OpenAPI Generator
+src/generated
+
 # Logs
 logs
 *.log

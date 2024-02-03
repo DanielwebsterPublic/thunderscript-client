@@ -1,0 +1,23 @@
+{
+  "name": "thunderscript-client",
+  "version": "1.0.0",
+  "description": "Typescript client for War Thunder's Localhost api",
+  "repository": "https://github.com/Daniel-Webster/thunderscript-client.git",
+  "author": "Daniel Webster",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.18.79",
+    "openapi-fetch": "^0.8.2",
+    "openapi-typescript": "^6.7.4",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "clean": "rm -rf ./src/generated",
+    "generate": "npx openapi-typescript ./src/openapi/war-thunder-localhost.yaml -o ./src/generated/thunder-client.d.ts",
+    "clean:generate": "npm run clean && npm run generate"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.12",
+    "ts-jest": "^29.1.2"
+  }
+}

@@ -1,0 +1,516 @@
+openapi: 3.0.0
+info:
+  title: War Thunder Localhost API
+  description: API documentation for the War Thunder Localhost API, providing access to various in-game data and functionalities.
+  version: 1.0.0
+servers:
+  - url: http://172.17.208.1:8111
+paths:
+  /state:
+    get:
+      summary: Retrieve current aircraft state data
+      description: Returns data regarding the current state of the aircraft including position, speed, altitude, and engine status.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                    description: Indicates whether the data is valid or not.
+                  aileron_%:
+                    type: integer
+                    description: Aileron position in percentage.
+                  elevator_%:
+                    type: integer
+                    description: Elevator position in percentage.
+                  rudder_%:
+                    type: integer
+                    description: Rudder position in percentage.
+                  H_m:
+                    type: integer
+                    description: Current aircraft altitude in meters.
+                  TAS_km/h:
+                    type: integer
+                    description: True airspeed in kilometers per hour.
+                  IAS_km/h:
+                    type: integer
+                    description: Indicated airspeed in kilometers per hour.
+                  M:
+                    type: number
+                    description: Mach number.
+                  AoA_deg:
+                    type: number
+                    description: Aircraft angle of attack in degrees.
+                  AoS_deg:
+                    type: number
+                    description: Angle of sideslip in degrees.
+                  Ny:
+                    type: number
+                    description: Load factor.
+                  Vy_m/s:
+                    type: number
+                    description: Vertical speed in meters per second.
+                  Wx_deg/s:
+                    type: integer
+                    description: Rotation on X-axis in degrees per second.
+                  Mfuel_kg:
+                    type: integer
+                    description: Fuel mass in kilograms.
+                  Mfuel0_kg:
+                    type: integer
+                    description: Initial fuel mass in kilograms.
+                  throttle_1_%:
+                    type: integer
+                    description: Throttle position for engine 1 in percentage.
+                  mixture_1_%:
+                    type: integer
+                    description: Mixture position for engine 1 in percentage.
+                  magneto_1:
+                    type: integer
+                    description: Magneto position for engine 1.
+                  power_1_hp:
+                    type: number
+                    description: Power of engine 1 in horse-power.
+                  RPM_1:
+                    type: integer
+                    description: RPM of engine 1.
+                  manifold_pressure_1_atm:
+                    type: number
+                    description: Manifold pressure of engine 1 in atm.
+                  oil_temp_1_C:
+                    type: integer
+                    description: Oil temperature of engine 1 in Celsius.
+                  pitch_1_deg:
+                    type: number
+                    description: Pitch of engine 1 in degrees.
+                  thrust_1_kgs:
+                    type: integer
+                    description: Thrust of engine 1 in kilograms.
+                  efficiency_1_%:
+                    type: integer
+                    description: Efficiency of engine 1 in percentage.
+      security: []
+  /mission.json:
+    get:
+      summary: Retrieve data from the current mission
+      description: Returns data regarding the current mission and its objectives.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objectives:
+                    type: array
+                    description: JSON array containing all mission objectives
+                    items:
+                      type: object
+                      properties:
+                        primary:
+                          type: boolean
+                          description: Flag to determine if this is a primary mission objective
+                        status:
+                          type: string
+                          description: Status of the current primary objective
+                          enum: [in_progress, completed, failed]
+                        text:
+                          type: string
+                          description: Instruction of what the player needs to do to complete the mission
+                  status:
+                    type: string
+                    description: Status of the current mission
+                    enum: [running, fail]
+      security: []
+  /map_obj.json:
+    get:
+      summary: Retrieve data from all map objects
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: The type of map object
+                    color:
+                      type: string
+                      description: The color of the map object
+                    rgb_color:
+                      type: array
+                      items:
+                        type: integer
+                      description: The RGB color code of the map object
+                    blink:
+                      type: integer
+                      description: Whether the map object is blinking
+                    icon:
+                      type: string
+                      description: The icon representing the map object
+                    icon_bg:
+                      type: string
+                      description: The background icon of the map object
+                    sx:
+                      type: number
+                      format: float
+                      description: The starting x-coordinate of the map object
+                    sy:
+                      type: number
+                      format: float
+                      description: The starting y-coordinate of the map object
+                    ex:
+                      type: number
+                      format: float
+                      description: The ending x-coordinate of the map object
+                    ey:
+                      type: number
+                      format: float
+                      description: The ending y-coordinate of the map object
+                    x:
+                      type: number
+                      format: float
+                      description: The x-coordinate of the map object
+                    y:
+                      type: number
+                      format: float
+                      description: The y-coordinate of the map object
+                    dx:
+                      type: number
+                      format: float
+                      description: The delta x-coordinate of the map object
+                    dy:
+                      type: number
+                      format: float
+                      description: The delta y-coordinate of the map object
+  /map_info.json:
+    get:
+      summary: Get information about the current map.
+      responses:
+        "200":
+          description: Successful response with map information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  grid_steps:
+                    type: array
+                    items:
+                      type: number
+                    description: Array of step sizes of the grid in the x and y directions.
+                  grid_zero:
+                    type: array
+                    items:
+                      type: number
+                    description: Array containing the coordinates of the zero point of the grid.
+                  map_generation:
+                    type: integer
+                    description: The generation of the map.
+                  map_max:
+                    type: array
+                    items:
+                      type: number
+                    description: Array containing the maximum coordinates of the map.
+                  map_min:
+                    type: array
+                    items:
+                      type: number
+                    description: Array containing the minimum coordinates of the map.
+  /indicators:
+    get:
+      summary: Get data from aircraft instruments.
+      responses:
+        "200":
+          description: Successful response with aircraft instrument data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                    description: Indicates if the data is valid.
+                  type:
+                    type: string
+                    description: The type of aircraft.
+                  speed:
+                    type: number
+                    description: The speed of the aircraft.
+                  pedals:
+                    type: number
+                    description: The pedal position.
+                  pedals1:
+                    type: number
+                    description: Additional pedal position.
+                  pedals2:
+                    type: number
+                    description: Additional pedal position.
+                  pedals3:
+                    type: number
+                    description: Additional pedal position.
+                  stick_elevator:
+                    type: number
+                    description: The position of the elevator control stick.
+                  stick_elevator1:
+                    type: number
+                    description: Additional elevator control stick position.
+                  stick_ailerons:
+                    type: number
+                    description: The position of the aileron control stick.
+                  vario:
+                    type: number
+                    description: The variometer reading.
+                  altitude_hour:
+                    type: number
+                    description: The altitude in hours.
+                  altitude_min:
+                    type: number
+                    description: The altitude in minutes.
+                  altitude_10k:
+                    type: number
+                    description: The altitude at 10,000 feet.
+                  aviahorizon_roll:
+                    type: number
+                    description: The roll angle of the artificial horizon.
+                  aviahorizon_pitch:
+                    type: number
+                    description: The pitch angle of the artificial horizon.
+                  bank:
+                    type: number
+                    description: The bank angle of the aircraft.
+                  turn:
+                    type: number
+                    description: The turn angle of the aircraft.
+                  compass:
+                    type: number
+                    description: The compass reading.
+                  compass1:
+                    type: number
+                    description: Additional compass reading.
+                  compass2:
+                    type: number
+                    description: Additional compass reading.
+                  clock_hour:
+                    type: number
+                    description: The hour on the clock.
+                  clock_min:
+                    type: number
+                    description: The minute on the clock.
+                  clock_sec:
+                    type: number
+                    description: The second on the clock.
+                  rpm_min:
+                    type: number
+                    description: The minimum RPM.
+                  rpm1_min:
+                    type: number
+                    description: Additional minimum RPM.
+                  rpm_hour:
+                    type: number
+                    description: The RPM per hour.
+                  rpm1_hour:
+                    type: number
+                    description: Additional RPM per hour.
+                  oil_pressure:
+                    type: number
+                    description: The oil pressure reading.
+                  oil_pressure1:
+                    type: number
+                    description: Additional oil pressure reading.
+                  head_temperature:
+                    type: number
+                    description: The head temperature reading.
+                  head_temperature1:
+                    type: number
+                    description: Additional head temperature reading.
+                  fuel:
+                    type: number
+                    description: The fuel level.
+                  fuel1:
+                    type: number
+                    description: Additional fuel level.
+                  fuel_pressure:
+                    type: number
+                    description: The fuel pressure reading.
+                  fuel_pressure1:
+                    type: number
+                    description: Additional fuel pressure reading.
+                  airbrake_lever:
+                    type: number
+                    description: The position of the airbrake lever.
+                  airbrake_indicator:
+                    type: number
+                    description: The airbrake indicator reading.
+                  gears:
+                    type: number
+                    description: The position of the gears.
+                  gears1:
+                    type: number
+                    description: Additional position of the gears.
+                  gears_lamp:
+                    type: number
+                    description: The gear lamp reading.
+                  flaps:
+                    type: number
+                    description: The position of the flaps.
+                  flaps1:
+                    type: number
+                    description: Additional position of the flaps.
+                  throttle:
+                    type: number
+                    description: The throttle position.
+                  throttle1:
+                    type: number
+                    description: Additional throttle position.
+                  weapon2:
+                    type: number
+                    description: Weapon status.
+                  weapon3:
+                    type: number
+                    description: Weapon status.
+                  mach:
+                    type: number
+                    description: The Mach number.
+                  g_meter:
+                    type: number
+                    description: The G-meter reading.
+                  g_meter_min:
+                    type: number
+                    description: The minimum G-meter reading.
+                  g_meter_max:
+                    type: number
+                    description: The maximum G-meter reading.
+                  blister1:
+                    type: number
+                    description: Blister status.
+                  blister2:
+                    type: number
+                    description: Blister status.
+                  blister3:
+                    type: number
+                    description: Blister status.
+                  blister4:
+                    type: number
+                    description: Blister status.
+                  blister5:
+                    type: number
+                    description: Blister status.
+                  blister6:
+                    type: number
+                    description: Blister status.
+                  blister7:
+                    type: number
+                    description: Blister status.
+                  wing_sweep_lever:
+                    type: string
+                    description: Wing sweep angle.
+      security: []
+  /hudmsg:
+    get:
+      summary: Get game data related to events and damage.
+      parameters:
+        - name: lastEvt
+          in: query
+          description: ID of the last event to search.
+          schema:
+            type: integer
+        - name: lastDmg
+          in: query
+          description: ID of the last damage to search.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful response with game data related to events and damage.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    description: List of events (currently always empty).
+                    items: {}
+                  damage:
+                    type: array
+                    description: List of damage events.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The ID of the damage event.
+                        msg:
+                          type: string
+                          description: The message describing the damage event.
+                        sender:
+                          type: string
+                          description: The sender of the damage event.
+                        enemy:
+                          type: boolean
+                          description: Indicates if the damage event is caused by an enemy.
+                        mode:
+                          type: string
+                          description: The mode of the damage event.
+      security: []
+  /gamechat:
+    get:
+      summary: Get game chat messages.
+      parameters:
+        - name: lastId
+          in: query
+          description: ID of the last message to retrieve all chat messages up until that point.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful response with chat messages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: The ID of the chat message.
+                    msg:
+                      type: string
+                      description: The content of the chat message.
+                    sender:
+                      type: string
+                      description: The name of the player who sent the message.
+                    enemy:
+                      type: boolean
+                      description: Indicates whether the player is an enemy or not.
+                    mode:
+                      type: string
+                      description: The mode of the chat message.
+  /map.img:
+    get:
+      summary: Get the current map image
+      description: Returns the current map image that the player is currently playing on in their session.
+      parameters:
+        - name: gen
+          in: query
+          description: Map generation number
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            image/jpeg: {}
+      security: []

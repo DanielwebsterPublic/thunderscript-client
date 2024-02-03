@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2022", // or the version of ECMAScript you want to target
+    "module": "node16",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "baseUrl": "./src", // or the directory where your source files reside
+    "paths": {
+      "*": [
+        "src/*"
+      ] // adjust this to your folder structure if necessary
+    }
+  },
+  "include": [
+    "src/**/*.ts" // adjust this to match your folder structure
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
