@@ -15,26 +15,30 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      - name: Install Yarn
-        run: npm install -g yarn@latest
 
       - name: Install Dependencies
-        run: yarn install
+        uses: borales/actions-yarn@v5
+        with: 
+          cmd: install
 
       - name: Build
-        run: yarn build
+        uses: borales/actions-yarn@v5
+        with: 
+          cmd: build
 
       - name: Test
-        run: yarn test
+        uses: borales/actions-yarn@v5
+        with: 
+          cmd: test
 
       - name: Release
-        run: yarn release
+        uses: borales/actions-yarn@v5
+        with: 
+          cmd: release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
