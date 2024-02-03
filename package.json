@@ -6,18 +6,26 @@
   "author": "Daniel Webster",
   "license": "MIT",
   "devDependencies": {
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/release-notes-generator": "^12.1.0",
+    "@types/jest": "^29.5.12",
     "@types/node": "^16.18.79",
+    "jest": "^29.7.0",
     "openapi-fetch": "^0.8.2",
     "openapi-typescript": "^6.7.4",
+    "prettier": "3.2.4",
+    "semantic-release": "^23.0.0",
+    "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
   },
   "scripts": {
     "clean": "rm -rf ./src/generated",
     "generate": "npx openapi-typescript ./src/openapi/war-thunder-localhost.yaml -o ./src/generated/thunder-client.d.ts",
-    "clean:generate": "npm run clean && npm run generate"
+    "clean:generate": "npm run clean && npm run generate",
+    "build": "yarn clean:generate && tsc",
+    "test": "jest",
+    "release": "semantic-release"
   },
-  "dependencies": {
-    "@types/jest": "^29.5.12",
-    "ts-jest": "^29.1.2"
-  }
+  "dependencies": {}
 }

@@ -4,14 +4,14 @@ info:
   description: API documentation for the War Thunder Localhost API, providing access to various in-game data and functionalities.
   version: 1.0.0
 servers:
-  - url: http://172.17.208.1:8111
+  - url: http://localhost:8111
 paths:
   /state:
     get:
       summary: Retrieve current aircraft state data
       description: Returns data regarding the current state of the aircraft including position, speed, altitude, and engine status.
       responses:
-        "200":
+        '200':
           description: Successful operation
           content:
             application/json:
@@ -99,7 +99,7 @@ paths:
       summary: Retrieve data from the current mission
       description: Returns data regarding the current mission and its objectives.
       responses:
-        "200":
+        '200':
           description: Successful operation
           content:
             application/json:
@@ -131,7 +131,7 @@ paths:
     get:
       summary: Retrieve data from all map objects
       responses:
-        "200":
+        '200':
           description: Successful operation
           content:
             application/json:
@@ -196,7 +196,7 @@ paths:
     get:
       summary: Get information about the current map.
       responses:
-        "200":
+        '200':
           description: Successful response with map information.
           content:
             application/json:
@@ -226,11 +226,14 @@ paths:
                     items:
                       type: number
                     description: Array containing the minimum coordinates of the map.
+                  valid:
+                    type: boolean
+                    description: Indicates if the map data is valid.
   /indicators:
     get:
       summary: Get data from aircraft instruments.
       responses:
-        "200":
+        '200':
           description: Successful response with aircraft instrument data.
           content:
             application/json:
@@ -430,7 +433,7 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Successful response with game data related to events and damage.
           content:
             application/json:
@@ -473,7 +476,7 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Successful response with chat messages.
           content:
             application/json:
@@ -509,8 +512,8 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: Successful operation
           content:
-            image/jpeg: {}
+            image/jpeg: { schema: { type: string, format: binary } }
       security: []
