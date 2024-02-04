@@ -4,6 +4,8 @@
   "description": "Typescript client for War Thunder's Localhost api",
   "repository": "https://github.com/Daniel-Webster/thunderscript-client.git",
   "author": "Daniel Webster",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "devDependencies": {
     "@semantic-release/github": "^9.2.6",
