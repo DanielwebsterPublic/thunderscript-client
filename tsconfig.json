@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2022", // or the version of ECMAScript you want to target
-    "module": "node16",
+    "target": "ES6",
+    "module": "NodeNext",
     "strict": true,
     "esModuleInterop": true,
+    "moduleResolution": "NodeNext",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
@@ -19,6 +20,7 @@
     "src/**/*.ts" // adjust this to match your folder structure
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.test.ts"
   ]
 }

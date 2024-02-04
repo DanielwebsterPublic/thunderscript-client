@@ -1,0 +1,49 @@
+name: Yarn Workflow
+
+on:
+  push:
+    branches:
+      - main # adjust to your main branch name
+  pull_request:
+    branches:
+      - main # adjust to your main branch name
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Clear Cache
+        uses: borales/actions-yarn@v5
+        with:
+          cmd: cache clean
+
+      - name: Install Dependencies
+        uses: borales/actions-yarn@v5
+        with:
+          cmd: install
+
+      - name: Build
+        uses: borales/actions-yarn@v5
+        with:
+          cmd: build
+
+      - name: Test
+        uses: borales/actions-yarn@v5
+        with:
+          cmd: test
+
+      - name: Release
+        uses: borales/actions-yarn@v5
+        with:
+          cmd: release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
