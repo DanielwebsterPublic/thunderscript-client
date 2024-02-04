@@ -54,7 +54,7 @@ export async function thunderClient(baseUrl: string = 'http://127.0.0.1:8111') {
     const { data, error } = await GET('/gamechat', {
       params: {
         query: {
-          lastId: 0,
+          lastId,
         },
       },
     });

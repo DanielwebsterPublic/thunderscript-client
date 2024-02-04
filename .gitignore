@@ -1,6 +1,11 @@
 # OpenAPI Generator
 src/generated
 
+# build
+cjs
+esm
+types
+
 # Logs
 logs
 *.log
