@@ -1,6 +1,6 @@
 # thunderscript-client
 
-War Thunder Localhost Client
+War Thunder Localhost Client library. Returns data hosted at the locally available api when running the War Thunder game.s
 
 # Installation
 
