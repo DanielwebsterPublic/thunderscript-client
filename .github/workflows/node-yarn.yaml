@@ -31,6 +31,11 @@ jobs:
         with:
           cmd: install
 
+      - name: Install Dependencies
+        uses: borales/actions-yarn@v5
+        with:
+          cmd: lint
+
       - name: Build
         uses: borales/actions-yarn@v5
         with:

@@ -28,7 +28,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./src/generated cjs esm types",
-    "generate": "yarn openapi-typescript ./src/openapi/war-thunder-localhost.yaml -o ./src/generated/thunder-client.d.ts",
+    "generate": "yarn openapi-typescript ./src/openapi/war-thunder-localhost.yaml -o ./src/generated/thunder-client.ts",
     "clean:generate": "yarn clean && yarn generate",
     "build:cjs": "tsc --declaration false --allowJs --outDir cjs --noEmit false --module CommonJS",
     "build:types": "tsc --declaration --declarationMap --isolatedModules false --outDir types --emitDeclarationOnly --noEmit false --module CommonJS",

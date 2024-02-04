@@ -25,8 +25,6 @@
     "strictPropertyInitialization": true,
     "stripInternal": true,
   },
-  "include": [
-    "src/**/*.ts", // adjust this to match your folder structure
-  ],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "**/*.test.ts"],
 }
