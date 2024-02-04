@@ -71,7 +71,7 @@ describe('ThunderClient', () => {
   });
 
   it('gets the map info', async () => {
-    const { getMapInfo } = await thunderClient();
+    const { getMapInfo } = thunderClient();
     const mapInfo = await getMapInfo();
     expect(mapInfo).toBeDefined();
     expect(mapInfo).toMatchObject({
@@ -88,15 +88,15 @@ describe('ThunderClient', () => {
   });
 
   it('gets the map image', async () => {
-    const { getMapImage } = await thunderClient();
-    const mapImage = await getMapImage();
+    const { getMapImage } = thunderClient();
+    const mapImage = await getMapImage(1);
     expect(mapImage).toBeDefined();
     // fs.writeFileSync(`${payloadFolder}/mapImage.png`, mapImage);
     expect(mapImage).toMatchObject(expect.any(Buffer));
   });
 
   it('gets the game chat', async () => {
-    const { getGameChat } = await thunderClient();
+    const { getGameChat } = thunderClient();
     const gameChat = await getGameChat(0);
 
     expect(gameChat).toBeDefined();
@@ -105,7 +105,7 @@ describe('ThunderClient', () => {
   });
 
   it('gets the hudmsg', async () => {
-    const { getHudmsg } = await thunderClient();
+    const { getHudmsg } = thunderClient();
     const hudmsg = await getHudmsg({ lastEvt: 0, lastDmg: 0 });
     expect(hudmsg).toBeDefined();
     expect(hudmsg).toMatchObject({
@@ -116,7 +116,7 @@ describe('ThunderClient', () => {
   });
 
   it('gets Map Objects', async () => {
-    const { getMapObjects } = await thunderClient();
+    const { getMapObjects } = thunderClient();
     const mapObjects = await getMapObjects();
     expect(mapObjects).toBeDefined();
     expect(mapObjects).toMatchObject(expect.arrayContaining([expect.any(Object)]));
@@ -124,7 +124,7 @@ describe('ThunderClient', () => {
   });
 
   it('gets the indicators', async () => {
-    const { getIndicators } = await thunderClient();
+    const { getIndicators } = thunderClient();
     const indicators = await getIndicators();
     expect(indicators).toBeDefined();
     expect(indicators).toMatchObject(
@@ -175,7 +175,7 @@ describe('ThunderClient', () => {
     writePayload('indicators', indicators);
   });
   it('gets the state', async () => {
-    const { getState } = await thunderClient();
+    const { getState } = thunderClient();
     const state = await getState();
     expect(state).toBeDefined();
     expect(state).toMatchObject(
@@ -218,7 +218,7 @@ describe('ThunderClient', () => {
   });
 
   it('gets the mission', async () => {
-    const { getMission } = await thunderClient();
+    const { getMission } = thunderClient();
     const mission = await getMission();
     expect(mission).toBeDefined();
     expect(mission).toMatchObject({ objectives: null, status: expect.any(String) });
