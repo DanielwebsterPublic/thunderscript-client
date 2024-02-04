@@ -4,10 +4,13 @@
   "description": "Typescript client for War Thunder's Localhost api",
   "repository": "https://github.com/Daniel-Webster/thunderscript-client.git",
   "author": "Daniel Webster",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "types",
   "files": [
-    "dist"
+    "cjs",
+    "esm",
+    "types"
   ],
   "license": "MIT",
   "devDependencies": {
@@ -25,10 +28,15 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "clean": "rm -rf ./src/generated",
-    "generate": "npx openapi-typescript ./src/openapi/war-thunder-localhost.yaml -o ./src/generated/thunder-client.d.ts",
-    "clean:generate": "npm run clean && npm run generate",
-    "build": "yarn clean:generate && tsc",
+    "clean": "rm -rf ./src/generated cjs esm types",
+    "generate": "yarn openapi-typescript ./src/openapi/war-thunder-localhost.yaml -o ./src/generated/thunder-client.d.ts",
+    "clean:generate": "yarn clean && yarn generate",
+    "build:cjs": "tsc --declaration false --allowJs --outDir cjs --noEmit false --module CommonJS",
+    "build:types": "tsc --declaration --declarationMap --isolatedModules false --outDir types --emitDeclarationOnly --noEmit false --module CommonJS",
+    "build:esm": "tsc --declaration false --allowJs --outDir esm --noEmit false --module ES2015",
+    "build": "yarn clean:generate && yarn build:cjs && yarn build:esm && yarn build:types",
+    "format": "prettier --write .",
+    "lint": "prettier --check .",
     "test": "jest",
     "release": "semantic-release"
   },
