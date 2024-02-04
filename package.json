@@ -6,6 +6,9 @@
   "author": "Daniel Webster",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@semantic-release/github": "^9.2.6",
