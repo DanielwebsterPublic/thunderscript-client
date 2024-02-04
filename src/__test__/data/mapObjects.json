@@ -1,0 +1,512 @@
+[
+  {
+    "type": "airfield",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "none",
+    "icon_bg": "none",
+    "sx": 0.351686,
+    "sy": 0.375087,
+    "ex": 0.330449,
+    "ey": 0.351501
+  },
+  {
+    "type": "aircraft",
+    "color": "#39D921",
+    "color[]": [
+      57,
+      217,
+      33
+    ],
+    "blink": 0,
+    "icon": "Player",
+    "icon_bg": "none",
+    "x": 0.405914,
+    "y": 0.438414,
+    "dx": 0.891817,
+    "dy": 0.452396
+  },
+  {
+    "type": "aircraft",
+    "color": "#f00C00",
+    "color[]": [
+      240,
+      12,
+      0
+    ],
+    "blink": 1,
+    "icon": "Fighter",
+    "icon_bg": "none",
+    "x": 0.424282,
+    "y": 0.369772,
+    "dx": 0.810434,
+    "dy": -0.58583
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.740201,
+    "y": 0.665642
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.737498,
+    "y": 0.66111
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.742988,
+    "y": 0.671795
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.729245,
+    "y": 0.731776
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.728171,
+    "y": 0.730395
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.730809,
+    "y": 0.730902
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.72618,
+    "y": 0.733194
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.525314,
+    "y": 0.496622
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.526972,
+    "y": 0.500335
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.522476,
+    "y": 0.484814
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.519207,
+    "y": 0.486918
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.52262,
+    "y": 0.485165
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.522312,
+    "y": 0.485374
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.522141,
+    "y": 0.484605
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.521753,
+    "y": 0.484725
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.52175,
+    "y": 0.48383
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.515287,
+    "y": 0.488498
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.515039,
+    "y": 0.48871
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.515476,
+    "y": 0.488246
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.532937,
+    "y": 0.50629
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.532666,
+    "y": 0.506644
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.532033,
+    "y": 0.505125
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.53195,
+    "y": 0.505969
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.530888,
+    "y": 0.504298
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Ship",
+    "icon_bg": "none",
+    "x": 0.530805,
+    "y": 0.505131
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Airdefence",
+    "icon_bg": "none",
+    "x": 0.734918,
+    "y": 0.653648
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Airdefence",
+    "icon_bg": "none",
+    "x": 0.768845,
+    "y": 0.679405
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Airdefence",
+    "icon_bg": "none",
+    "x": 0.768667,
+    "y": 0.679143
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Airdefence",
+    "icon_bg": "none",
+    "x": 0.757198,
+    "y": 0.705424
+  },
+  {
+    "type": "ground_model",
+    "color": "#174DFF",
+    "color[]": [
+      23,
+      77,
+      255
+    ],
+    "blink": 0,
+    "icon": "Airdefence",
+    "icon_bg": "none",
+    "x": 0.757389,
+    "y": 0.705196
+  },
+  {
+    "type": "ground_model",
+    "color": "#f00C00",
+    "color[]": [
+      240,
+      12,
+      0
+    ],
+    "blink": 1,
+    "icon": "LightTank",
+    "icon_bg": "none",
+    "x": 0.283089,
+    "y": 0.361784
+  },
+  {
+    "type": "ground_model",
+    "color": "#f00C00",
+    "color[]": [
+      240,
+      12,
+      0
+    ],
+    "blink": 1,
+    "icon": "MediumTank",
+    "icon_bg": "none",
+    "x": 0.283859,
+    "y": 0.362262
+  },
+  {
+    "type": "ground_model",
+    "color": "#f00C00",
+    "color[]": [
+      240,
+      12,
+      0
+    ],
+    "blink": 1,
+    "icon": "TankDestroyer",
+    "icon_bg": "none",
+    "x": 0.27831,
+    "y": 0.349133
+  }
+]

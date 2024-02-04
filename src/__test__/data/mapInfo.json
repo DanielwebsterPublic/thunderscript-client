@@ -1,0 +1,25 @@
+{
+  "grid_size": [
+    65536,
+    65536
+  ],
+  "grid_steps": [
+    6500,
+    6500
+  ],
+  "grid_zero": [
+    -32768,
+    32768
+  ],
+  "hud_type": 0,
+  "map_generation": 1,
+  "map_max": [
+    32768,
+    32768
+  ],
+  "map_min": [
+    -32768,
+    -32768
+  ],
+  "valid": true
+}

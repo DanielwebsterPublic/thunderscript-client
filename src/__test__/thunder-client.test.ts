@@ -1,11 +1,79 @@
+import path from 'path';
 import { thunderClient } from '../thunder-client';
 
+import fs from 'fs';
+
+const payloadFolder = path.join(__dirname, 'data');
+// Set to true to update the test payloads
+const integrationMode = false;
+
+function writePayload(name: string, data: any) {
+  if (integrationMode) {
+    fs.writeFileSync(`${payloadFolder}/${name}.json`, JSON.stringify(data, null, 2));
+  }
+}
+
+const chunks = Uint8Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+let i = 0;
+const mockReadableStream = {
+  getReader: jest.fn().mockReturnValue({
+    read: jest.fn().mockResolvedValue({ done: true, value: chunks[i++] }),
+  }),
+};
+
+function useMockResponses() {
+  const statePayload = require(path.join(payloadFolder, 'state.json'));
+  const mapInfoPayload = require(path.join(payloadFolder, 'mapInfo.json'));
+  const indicatorsPayload = require(path.join(payloadFolder, 'indicators.json'));
+  const mapObjectsPayload = require(path.join(payloadFolder, 'mapObjects.json'));
+  const missionPayload = require(path.join(payloadFolder, 'mission.json'));
+  const gameChatPayload = require(path.join(payloadFolder, 'gameChat.json'));
+  const hudmsgPayload = require(path.join(payloadFolder, 'hudmsg.json'));
+  jest.mock('openapi-fetch', () => {
+    return jest.fn().mockImplementation(() => {
+      return {
+        GET: jest.fn().mockImplementation((path: string) => {
+          if (path === '/state') {
+            return { data: statePayload, error: null };
+          }
+          if (path === '/map_info.json') {
+            return { data: mapInfoPayload, error: null };
+          }
+          if (path === '/indicators') {
+            return { data: indicatorsPayload, error: null };
+          }
+          if (path === '/map_obj.json') {
+            return { data: mapObjectsPayload, error: null };
+          }
+          if (path === '/mission.json') {
+            return { data: missionPayload, error: null };
+          }
+          if (path === '/gamechat') {
+            return { data: gameChatPayload, error: null };
+          }
+          if (path === '/hudmsg') {
+            return { data: hudmsgPayload, error: null };
+          }
+          if (path === '/map.img?gen=1') {
+            return Promise.resolve({ data: mockReadableStream, error: 'Unknown path' });
+          }
+          return Promise.resolve({ data: null, error: 'Unknown path' });
+        }),
+      };
+    });
+  });
+}
+
 describe('ThunderClient', () => {
+  beforeEach(() => {
+    if (!integrationMode) useMockResponses();
+  });
+
   it('gets the map info', async () => {
     const { getMapInfo } = await thunderClient();
     const mapInfo = await getMapInfo();
     expect(mapInfo).toBeDefined();
-    // Use Matchers to validate the response
+    writePayload('mapInfo', mapInfo);
     expect(mapInfo).toMatchObject({
       grid_size: expect.arrayContaining([expect.any(Number)]),
       grid_steps: expect.arrayContaining([expect.any(Number)]),
@@ -22,13 +90,15 @@ describe('ThunderClient', () => {
     const { getMapImage } = await thunderClient();
     const mapImage = await getMapImage();
     expect(mapImage).toBeDefined();
-    // Use Matchers to validate the response
+    // fs.writeFileSync(`${payloadFolder}/mapImage.png`, mapImage);
     expect(mapImage).toMatchObject(expect.any(Buffer));
   });
 
   it('gets the game chat', async () => {
     const { getGameChat } = await thunderClient();
     const gameChat = await getGameChat(0);
+    writePayload('gameChat', gameChat);
+
     expect(gameChat).toBeDefined();
     expect(gameChat).toMatchObject(expect.any(Object));
   });
@@ -36,6 +106,7 @@ describe('ThunderClient', () => {
   it('gets the hudmsg', async () => {
     const { getHudmsg } = await thunderClient();
     const hudmsg = await getHudmsg({ lastEvt: 0, lastDmg: 0 });
+    writePayload('hudmsg', hudmsg);
     expect(hudmsg).toBeDefined();
     expect(hudmsg).toMatchObject({
       damage: expect.any(Object),
@@ -46,6 +117,7 @@ describe('ThunderClient', () => {
   it('gets Map Objects', async () => {
     const { getMapObjects } = await thunderClient();
     const mapObjects = await getMapObjects();
+    writePayload('mapObjects', mapObjects);
     expect(mapObjects).toBeDefined();
     expect(mapObjects).toMatchObject(expect.arrayContaining([expect.any(Object)]));
   });
@@ -53,6 +125,7 @@ describe('ThunderClient', () => {
   it('gets the indicators', async () => {
     const { getIndicators } = await thunderClient();
     const indicators = await getIndicators();
+    writePayload('indicators', indicators);
     expect(indicators).toBeDefined();
     expect(indicators).toMatchObject(
       expect.objectContaining({
@@ -100,10 +173,10 @@ describe('ThunderClient', () => {
       }),
     );
   });
-  // {"AoA, deg": -0.8, "AoS, deg": 0.1, "H, m": 5194, "IAS, km/h": 1185, "M": 1.34, "Mfuel, kg": 3341, "Mfuel0, kg": 9400, "Ny": 1.34, "RPM 1": 8350, "RPM 2": 8350, "TAS, km/h": 1544, "Vy, m/s": 80.3, "Wx, deg/s": 0, "aileron, %": -0, "airbrake, %": 0, "efficiency 1, %": 0, "efficiency 2, %": 0, "elevator, %": -7, "flaps, %": 0, "gear, %": 0, "manifold pressure 1, atm": 1, "manifold pressure 2, atm": 1, "oil temp 1, C": 92, "oil temp 2, C": 92, "power 1, hp": 0, "power 2, hp": 0, "rudder, %": 2, "throttle 1, %": 110, "throttle 2, %": 110, "thrust 1, kgs": 16535, "thrust 2, kgs": 16535, "valid": true}
   it('gets the state', async () => {
     const { getState } = await thunderClient();
     const state = await getState();
+    writePayload('state', state);
     expect(state).toBeDefined();
     expect(state).toMatchObject(
       expect.objectContaining({
@@ -146,6 +219,7 @@ describe('ThunderClient', () => {
   it('gets the mission', async () => {
     const { getMission } = await thunderClient();
     const mission = await getMission();
+    writePayload('mission', mission);
     expect(mission).toBeDefined();
     expect(mission).toMatchObject({ objectives: null, status: expect.any(String) });
   });
