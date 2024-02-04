@@ -1,1 +1,1 @@
-export { thunderClient } from './thunder-client';
+export * from './thunder-client';
