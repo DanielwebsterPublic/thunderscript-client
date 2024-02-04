@@ -3,10 +3,10 @@ name: Yarn Workflow
 on:
   push:
     branches:
-      - main  # adjust to your main branch name
+      - main # adjust to your main branch name
   pull_request:
     branches:
-      - main  # adjust to your main branch name
+      - main # adjust to your main branch name
 
 jobs:
   build:
@@ -14,8 +14,8 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-      
+        uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -23,27 +23,27 @@ jobs:
 
       - name: Clear Cache
         uses: borales/actions-yarn@v5
-        with: 
+        with:
           cmd: cache clean
 
       - name: Install Dependencies
         uses: borales/actions-yarn@v5
-        with: 
+        with:
           cmd: install
 
       - name: Build
         uses: borales/actions-yarn@v5
-        with: 
+        with:
           cmd: build
 
       - name: Test
         uses: borales/actions-yarn@v5
-        with: 
+        with:
           cmd: test
 
       - name: Release
         uses: borales/actions-yarn@v5
-        with: 
+        with:
           cmd: release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
