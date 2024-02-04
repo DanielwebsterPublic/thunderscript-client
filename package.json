@@ -27,5 +27,8 @@
     "test": "jest",
     "release": "semantic-release"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "resolutions": {
+    "wrap-ansi": "7.0.0"
+  }
 }
