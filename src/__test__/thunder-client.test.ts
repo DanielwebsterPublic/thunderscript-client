@@ -1,11 +1,55 @@
-import path from 'path';
-import { thunderClient } from '../thunder-client';
-
-import fs from 'fs';
-
-const payloadFolder = path.join(__dirname, 'data');
 // Set to true to update the test payloads
 const integrationMode = false;
+
+import path from 'path';
+const payloadFolder = path.join(__dirname, 'data');
+const statePayload = require(path.join(payloadFolder, 'state.json'));
+const mapInfoPayload = require(path.join(payloadFolder, 'mapInfo.json'));
+const indicatorsPayload = require(path.join(payloadFolder, 'indicators.json'));
+const mapObjectsPayload = require(path.join(payloadFolder, 'mapObjects.json'));
+const missionPayload = require(path.join(payloadFolder, 'mission.json'));
+const gameChatPayload = require(path.join(payloadFolder, 'gameChat.json'));
+const hudmsgPayload = require(path.join(payloadFolder, 'hudmsg.json'));
+if (!integrationMode) {
+  // This is dumb but I had to use fetch to download the map
+  // @ts-ignore
+  fetch = jest.fn().mockImplementation(() => {
+    return Promise.resolve({
+      body: mockReadableStream,
+    });
+  });
+  jest.mock('openapi-fetch', () => {
+    return jest.fn().mockImplementation(() => ({
+      GET: jest.fn().mockImplementation((path: string) => {
+        if (path === '/state') {
+          return Promise.resolve({ data: statePayload, error: null });
+        }
+        if (path === '/map_info.json') {
+          return Promise.resolve({ data: mapInfoPayload, error: null });
+        }
+        if (path === '/indicators') {
+          return Promise.resolve({ data: indicatorsPayload, error: null });
+        }
+        if (path === '/map_obj.json') {
+          return Promise.resolve({ data: mapObjectsPayload, error: null });
+        }
+        if (path === '/mission.json') {
+          return Promise.resolve({ data: missionPayload, error: null });
+        }
+        if (path === '/gamechat') {
+          return Promise.resolve({ data: gameChatPayload, error: null });
+        }
+        if (path === '/hudmsg') {
+          return Promise.resolve({ data: hudmsgPayload, error: null });
+        }
+        return Promise.resolve({ data: null, error: 'Unknown path' });
+      }),
+    }));
+  });
+}
+
+import { thunderClient } from '../thunder-client';
+import fs from 'fs';
 
 function writePayload(name: string, data: any) {
   if (integrationMode) {
@@ -21,59 +65,15 @@ const mockReadableStream = {
   }),
 };
 
-function useMockResponses() {
-  const statePayload = require(path.join(payloadFolder, 'state.json'));
-  const mapInfoPayload = require(path.join(payloadFolder, 'mapInfo.json'));
-  const indicatorsPayload = require(path.join(payloadFolder, 'indicators.json'));
-  const mapObjectsPayload = require(path.join(payloadFolder, 'mapObjects.json'));
-  const missionPayload = require(path.join(payloadFolder, 'mission.json'));
-  const gameChatPayload = require(path.join(payloadFolder, 'gameChat.json'));
-  const hudmsgPayload = require(path.join(payloadFolder, 'hudmsg.json'));
-  jest.mock('openapi-fetch', () => {
-    return jest.fn().mockImplementation(() => {
-      return {
-        GET: jest.fn().mockImplementation((path: string) => {
-          if (path === '/state') {
-            return { data: statePayload, error: null };
-          }
-          if (path === '/map_info.json') {
-            return { data: mapInfoPayload, error: null };
-          }
-          if (path === '/indicators') {
-            return { data: indicatorsPayload, error: null };
-          }
-          if (path === '/map_obj.json') {
-            return { data: mapObjectsPayload, error: null };
-          }
-          if (path === '/mission.json') {
-            return { data: missionPayload, error: null };
-          }
-          if (path === '/gamechat') {
-            return { data: gameChatPayload, error: null };
-          }
-          if (path === '/hudmsg') {
-            return { data: hudmsgPayload, error: null };
-          }
-          if (path === '/map.img?gen=1') {
-            return Promise.resolve({ data: mockReadableStream, error: 'Unknown path' });
-          }
-          return Promise.resolve({ data: null, error: 'Unknown path' });
-        }),
-      };
-    });
-  });
-}
-
 describe('ThunderClient', () => {
-  beforeEach(() => {
-    if (!integrationMode) useMockResponses();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('gets the map info', async () => {
     const { getMapInfo } = await thunderClient();
     const mapInfo = await getMapInfo();
     expect(mapInfo).toBeDefined();
-    writePayload('mapInfo', mapInfo);
     expect(mapInfo).toMatchObject({
       grid_size: expect.arrayContaining([expect.any(Number)]),
       grid_steps: expect.arrayContaining([expect.any(Number)]),
@@ -84,6 +84,7 @@ describe('ThunderClient', () => {
       map_min: expect.arrayContaining([expect.any(Number)]),
       valid: true,
     });
+    writePayload('mapInfo', mapInfo);
   });
 
   it('gets the map image', async () => {
@@ -97,35 +98,34 @@ describe('ThunderClient', () => {
   it('gets the game chat', async () => {
     const { getGameChat } = await thunderClient();
     const gameChat = await getGameChat(0);
-    writePayload('gameChat', gameChat);
 
     expect(gameChat).toBeDefined();
     expect(gameChat).toMatchObject(expect.any(Object));
+    writePayload('gameChat', gameChat);
   });
 
   it('gets the hudmsg', async () => {
     const { getHudmsg } = await thunderClient();
     const hudmsg = await getHudmsg({ lastEvt: 0, lastDmg: 0 });
-    writePayload('hudmsg', hudmsg);
     expect(hudmsg).toBeDefined();
     expect(hudmsg).toMatchObject({
       damage: expect.any(Object),
       events: expect.any(Object),
     });
+    writePayload('hudmsg', hudmsg);
   });
 
   it('gets Map Objects', async () => {
     const { getMapObjects } = await thunderClient();
     const mapObjects = await getMapObjects();
-    writePayload('mapObjects', mapObjects);
     expect(mapObjects).toBeDefined();
     expect(mapObjects).toMatchObject(expect.arrayContaining([expect.any(Object)]));
+    writePayload('mapObjects', mapObjects);
   });
 
   it('gets the indicators', async () => {
     const { getIndicators } = await thunderClient();
     const indicators = await getIndicators();
-    writePayload('indicators', indicators);
     expect(indicators).toBeDefined();
     expect(indicators).toMatchObject(
       expect.objectContaining({
@@ -172,11 +172,11 @@ describe('ThunderClient', () => {
         water_temperature_min: expect.any(Number),
       }),
     );
+    writePayload('indicators', indicators);
   });
   it('gets the state', async () => {
     const { getState } = await thunderClient();
     const state = await getState();
-    writePayload('state', state);
     expect(state).toBeDefined();
     expect(state).toMatchObject(
       expect.objectContaining({
@@ -214,13 +214,14 @@ describe('ThunderClient', () => {
         valid: expect.any(Boolean),
       }),
     );
+    writePayload('state', state);
   });
 
   it('gets the mission', async () => {
     const { getMission } = await thunderClient();
     const mission = await getMission();
-    writePayload('mission', mission);
     expect(mission).toBeDefined();
     expect(mission).toMatchObject({ objectives: null, status: expect.any(String) });
+    writePayload('mission', mission);
   });
 });
